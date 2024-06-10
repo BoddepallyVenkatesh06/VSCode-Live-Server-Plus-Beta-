@@ -1,0 +1,127 @@
+{
+  "name": "vscode-live-server-plus-plus",
+  "displayName": "Live Server++",
+  "description": "Static Server for your HTML CSS Project. It's Truly Live",
+  "version": "0.0.1",
+  "publisher": "ritwickdey",
+  "engines": {
+    "vscode": "^1.33.0"
+  },
+  "author": {
+    "name": "Ritwick Dey",
+    "email": "ritwickdey@outlook.com",
+    "url": "https://ritwickdey.github.io"
+  },
+  "icon": "images/vscode-live-server-plus-plus.png",
+  "categories": [
+    "Other"
+  ],
+  "preview": true,
+  "galleryBanner": {
+    "color": "#3c1c59",
+    "theme": "dark"
+  },
+  "bugs": {
+    "url": "https://github.com/ritwickdey/vscode-live-server-plus-plus/issues",
+    "email": "ritwickdey@outlook.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ritwickdey/vscode-live-server-plus-plus.git"
+  },
+  "homepage": "https://ritwickdey.github.io/vscode-live-server-plus-plus",
+  "activationEvents": [
+    "*"
+  ],
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "copy-assets": "cpx \"./src/core/assets/**/*\" \"./out/core/assets\"",
+    "copy-assets:watch": "npm run copy-assets -- --w",
+    "compile": "tsc -p ./ && npm run copy-assets",
+    "watch": "npm run copy-assets  && tsc -watch -p ./",
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "test": "npm run compile && node ./node_modules/vscode/bin/test"
+  },
+  "main": "./out/extension/index.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.live-server++.open",
+        "title": "Live Server++ : Open Server"
+      },
+      {
+        "command": "extension.live-server++.close",
+        "title": "Live Server++ : Close Server"
+      }
+    ],
+    "configuration": {
+      "title": "LiveServer++",
+      "properties": {
+        "liveServer++.port": {
+          "type": "number",
+          "default": 5555,
+          "minimum": 0,
+          "maximum": 65535,
+          "description": "Use 0 for random port."
+        },
+        "liveServer++.browser": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": "default",
+          "enum": [
+            "default",
+            "chrome",
+            "firefox",
+            "microsoft-edge",
+            null
+          ],
+          "description": "Set your favorite browser"
+        },
+        "liveServer++.root": {
+          "type": "string",
+          "default": "./",
+          "pattern": "./|/[^\\/]",
+          "description": "Change root of Live Server.\nE.g.: ./subfolder1/subfolder2"
+        },
+        "liveServer++.timeout": {
+          "type": "number",
+          "default": 300,
+          "description": "In millisecond."
+        },
+        "liveServer++.indexFile": {
+          "type": "string",
+          "default": "index.html",
+          "description": "Index File of server"
+        },
+        "liveServer++.reloadingStrategy": {
+          "type": "string",
+          "default": "hot",
+          "enum": [
+            "hot",
+            "partial-reload",
+            "reload"
+          ],
+          "description": "Reloading Strategy.\n'hot' = Inplace DOM update[Experimental] \n 'partial-reload' = Reload DOM without refreshing page\n 'reload'= Full page reload"
+        }
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/mime-types": "^2.1.0",
+    "@types/mocha": "^2.2.42",
+    "@types/node": "^10.12.21",
+    "@types/open": "^6.1.0",
+    "@types/ws": "^6.0.1",
+    "cpx": "^1.5.0",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.1",
+    "vscode": "^1.1.28"
+  },
+  "dependencies": {
+    "mime-types": "^2.1.22",
+    "open": "^6.1.0",
+    "ws": "^6.2.1"
+  }
+}
